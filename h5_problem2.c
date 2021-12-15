@@ -3,9 +3,10 @@
 #include<string.h>
 #include<omp.h>
 #include<dirent.h>
+#include<time.h>
 
 #define MAX_FILES 10
-#define MAX_CHAR 200
+#define MAX_CHAR 2000
 #define MAX_KEYS 200
 #define MAX_KEY_LENGTH 200
 
@@ -154,9 +155,11 @@ int main(int argc, char* argv[])
     int keys_count[MAX_KEYS];//to count each key's access time
     char buffer[MAX_KEY_LENGTH];//use when fgets
     char *temp;//used to save keys
+    clock_t start, end;
 
     thread_sz = strtol(argv[1], NULL, 10);
 
+    start = clock();
     FILE *fp = fopen("keys.txt", "r");//open key file and generate key
     if(fp == NULL)
     {
@@ -180,6 +183,9 @@ int main(int argc, char* argv[])
 
     for(i=0; i<total_key; i++)//print result
         printf("%s: %d times\n", keys[i], keys_count[i]);
+    end = clock();
+    double diff = end-start;
+    printf("Total time is: %f s\n", diff/CLOCKS_PER_SEC);
 
     return 0;
 }

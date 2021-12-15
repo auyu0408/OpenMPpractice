@@ -1,0 +1,21 @@
+Recent studies show that particular intraocular lens characteristics 
+can contribute to lens dislocation after the surgery 
+Moreover, the expert surgeons argue that there can be a direct relationship 
+between the overall time of lens unfolding and the risk of
+lens relocation after the surgery 
+Some surgeons also hypothesize that severe lens instability during the 
+surgery is a symptom of lens relocation 
+To discover the potential correlations between lens relocation and its 
+possibly contributing factors surgeons require a tool for systematic feature extraction 
+Indeed, an automatic approach is required for (i) detecting the lens 
+implantation phase to determine the starting time for lens statistics’ 
+computation and (ii) segmenting the lens and pupil to compute the lens 
+statistics over time 
+The irregularity-related statistics can afterward be extracted by tracking 
+the lens’s relative size (normalized by the pupil’s size) and relative 
+movements (by calibrating the pupil) 
+Due to the dearth of computing power in the operation rooms, automatic 
+phase detection and lens/pupil segmentation on the fly is not currently achievable 
+Alternatively, this analysis can be performed in a post hoc manner 
+using recorded cataract surgery videos 
+The contributions of this paper are:

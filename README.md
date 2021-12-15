@@ -73,7 +73,7 @@ void Count_sort(int a[], int n) {
 
   - qsort: 0.000005s
 
-  - ![](/screenshot/10.png)
+  - ![](https://github.com/auyu0408/OpenMPpractice/blob/master/screenshot/10.png?raw=true)
 
 - n = 1000
 
@@ -83,7 +83,7 @@ void Count_sort(int a[], int n) {
 
   - qsort: 0.000099s
 
-  - ![](/screenshot/1000.png)
+  - ![](https://github.com/auyu0408/OpenMPpractice/blob/master/screenshot/1000.png?raw=true)
 
 - n = 10000
 
@@ -93,6 +93,70 @@ void Count_sort(int a[], int n) {
 
   - qsort: 0.001229s
 
-  - ![](/screenshot/10000.png)
+  - ![](https://github.com/auyu0408/OpenMPpractice/blob/master/screenshot/10000.png?raw=true)
 
 # problem 2
+
+## Directories
+
+- keys: keys file, from parts of a paper, I separated it into many lines.
+
+- words: tokens' directory
+
+- h5_problem2.c: source
+
+## Usage
+
+- compile source code
+
+```bash
+gcc -g -Wall -fopenmp -o h5_problem2 h5_problem2.c
+```
+
+- execution
+
+```bash
+./h5_problem2 <num>
+```
+
+- num: total thread you want to produce
+
+## Method
+
+1. Get Thread number from command
+
+2. Read keyword file and puts keyword in array
+
+3. open token folder and open file inside the directory
+
+4. producers read token file and enqueue it
+
+5. consumers dequeue token, separate the words and count when it is a keywords
+
+6. after all file readout, producer end
+
+7. after all producers end the queue is empty, consumer end
+
+## Result analysis
+
+- 我試著做了都是6個thread的情況下，一個producer和多個producer的差別
+
+- one producer
+
+- ![](https://github.com/auyu0408/OpenMPpractice/blob/master/screenshot/oneproducer.png?raw=true)
+
+- producer = total threads / 2
+
+- ![](https://github.com/auyu0408/OpenMPpractice/blob/master/screenshot/half.png?raw=true)
+
+- one consumer
+
+- ![](https://github.com/auyu0408/OpenMPpractice/blob/master/screenshot/oneconsumer.png?raw=true)
+
+- 從結果來看，會發現應該是read file的部份比較花時間，所以如果只有一個producer會比較費時
+
+## Difficulties
+
+- 一開始不確定在是讓producer在讀檔案的時候就把單字分開比較好還是讓consumer把單字分開比較好，但如果讓producer分開的話可能就會有很多queue的元素；所以後來選擇了對consumer負擔大一點的方法
+
+- 另外，如果是多個producer有時候會有同時free掉檔案的情況；只有單個producer則不會

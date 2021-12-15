@@ -1,4 +1,6 @@
+I
+lens
+eye
+is
+In
 apple
-banana
-cat
-dog
